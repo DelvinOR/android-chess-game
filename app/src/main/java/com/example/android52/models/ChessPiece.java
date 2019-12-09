@@ -92,6 +92,14 @@ public abstract class ChessPiece {
 			}
 		}
 	}
+
+	/**
+	 * This methods takes in the side field of a chess piece and returns the correct
+	 * chess piece in unicode to be used in the corresponding subclass.
+	 * @param side used to correctly define the unicode character for any chess piece
+	 * @return
+	 */
+	public abstract char getCorrectColorPiece(char side);
 	
 	
 }
