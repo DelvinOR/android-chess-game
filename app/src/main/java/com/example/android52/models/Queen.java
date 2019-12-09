@@ -21,6 +21,12 @@ public class Queen extends ChessPiece {
 		// TODO Auto-generated constructor stub
 	}
 
+	public char getCorrectColorPiece(){
+		if(this.side == 'w')
+			return '\u2655';
+		else return '\u265B';
+	}
+
 	@Override
 	public boolean isMoveValid(HashMap<Character, ChessPiece[]> board, char file, int rank) {
 		// Queen can move any number of vacant square diagonally, horizontaslly, or

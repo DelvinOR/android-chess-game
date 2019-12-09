@@ -21,6 +21,12 @@ public class Knight extends ChessPiece {
 		// TODO Auto-generated constructor stub
 	}
 
+	public char getCorrectColorPiece(){
+		if(this.side == 'w')
+			return '\u2658';
+		else return '\u265E';
+	}
+
 	@Override
 	public boolean isMoveValid(HashMap<Character, ChessPiece[]> board, char file, int rank) {
 		// Knight can move to a square that is two squares away horizontally

@@ -69,6 +69,12 @@ public class Bishop extends ChessPiece {
 		return true;
 	}
 
+	public char getCorrectColorPiece(){
+		if(this.side == 'w')
+			return '\u2657';
+		else return '\u265D';
+	}
+
 	/**
 	 * The string format of the Piece.
 	 */

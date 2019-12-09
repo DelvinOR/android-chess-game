@@ -25,6 +25,12 @@ public class Pawn extends ChessPiece {
 		// TODO Auto-generated constructor stub
 	}
 
+	public char getCorrectColorPiece(){
+		if(this.side == 'w')
+			return '\u2659';
+		else return '\u265F';
+	}
+
 	@Override
 	public boolean isMoveValid(HashMap<Character, ChessPiece[]> board, char file, int rank) {
 		// TODO Auto-generated method stub

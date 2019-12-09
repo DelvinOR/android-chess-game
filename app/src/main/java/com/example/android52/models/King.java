@@ -23,6 +23,12 @@ public class King extends ChessPiece {
 		// TODO Auto-generated constructor stub
 	}
 
+	public char getCorrectColorPiece(){
+		if(this.side == 'w')
+			return '\u2654';
+		else return '\u265A';
+	}
+
 	@Override
 	public boolean isMoveValid(HashMap<Character, ChessPiece[]> board, char file, int rank) {
 		int rankDiff = Math.abs(rank - this.rank);

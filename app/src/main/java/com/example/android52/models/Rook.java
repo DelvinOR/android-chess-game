@@ -23,6 +23,12 @@ public class Rook extends ChessPiece {
 		// TODO Auto-generated constructor stub
 	}
 
+	public char getCorrectColorPiece(){
+		if(this.side == 'w')
+			return '\u2656';
+		else return '\u265C';
+	}
+
 	@Override
 	public boolean isMoveValid(HashMap<Character, ChessPiece[]> board, char file, int rank) {
 		// Rook can move any number of vacant squares vertically or horizontally
