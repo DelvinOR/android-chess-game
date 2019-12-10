@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:background="@mipmap/Webp">
+    tools:context=".RealMainActivity"
+    android:background="@mipmap/chessappbackground"
+    android:id="@+id/chessLayout">
 
     <TextView
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
         android:textAlignment="center"
         android:id="@+id/welcomeTextView"
         android:textSize="30sp"
-        android:textAppearance="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         />
 
     <Button
@@ -25,6 +26,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="400dp"
         android:text="Play" />
+
+    <Button
+        android:id="@+id/gameVaultButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Game Vault"/>
 
 
 </LinearLayout>

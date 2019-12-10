@@ -2,6 +2,7 @@ package com.example.android52.controllers;
 
 import java.util.Scanner;
 
+import com.example.android52.RealMainActivity;
 import com.example.android52.models.ChessBoard;
 import com.example.android52.models.King;
 import com.example.android52.models.Pawn;
@@ -75,8 +76,13 @@ public class Controller {
 			System.out.println();
 		}
 
+		// GAME OVER HERE?
+		// THE CODE UNDER HERE IS TEMPORARY
 		sc.close();
-
+		// This is where we will need to do all the calling to stop screen sharing
+		RealMainActivity.mMediaRecorder.stop();
+		RealMainActivity.mMediaRecorder.reset();
+		new RealMainActivity().stopRecordScreen();
 	}
 
 	public static boolean isCorrectFormat(String s) {
