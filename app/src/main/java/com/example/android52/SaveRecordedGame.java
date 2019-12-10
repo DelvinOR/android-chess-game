@@ -1,5 +1,6 @@
 package com.example.android52;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -26,16 +27,21 @@ public class SaveRecordedGame extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 RealMainActivity.recordedGamesHashMap.put(gameTitleEditText.getText().toString(), RealMainActivity.mVideoURL);
-                finish();
+                backToHome();
             }
         });
 
         no_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                backToHome();
             }
         });
 
+    }
+
+    public void backToHome(){
+        Intent backToHomepage = new Intent(this, RealMainActivity.class);
+        startActivity(backToHomepage);
     }
 }
