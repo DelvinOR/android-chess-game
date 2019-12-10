@@ -218,7 +218,7 @@ public class RealMainActivity extends AppCompatActivity {
         mVirtualDisplay.release();
         destroyMediaProjection();
 
-        // call for save recorded game popout
+        // call for save recorded game pop out window
         Intent saveGameIntent = new Intent(this, SaveRecordedGame.class);
         startActivity(saveGameIntent);
 
