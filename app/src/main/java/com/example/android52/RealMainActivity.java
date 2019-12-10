@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -36,7 +37,9 @@ public class RealMainActivity extends AppCompatActivity {
     // This will hold all the recorded games that the user decides to record
     // Since it is static, then we can use it in all java files in the same packages
     public static HashMap<String,String> recordedGamesHashMap = new HashMap<>();
-
+    public static HashMap<String,String> gameTitlesAndDates = new HashMap<>();
+;   public static ArrayList<String> arrayOfGameTitles = new ArrayList<>();
+    public static ArrayList<String> arrayOfGameRecordedDates = new ArrayList<>();
     // Following fields will be used for screen recording
     public static final int REQUEST_CODE = 1000;
     public static final int REQUEST_PERMISSION = 1001;
@@ -62,6 +65,7 @@ public class RealMainActivity extends AppCompatActivity {
     }
 
     public static String mVideoURL; // holds link to the recorded game
+    public static String dateOfRecordedGame;
 
     private TextView welcomeTextView;
     private Button playChessButton, gameVaultButton;
@@ -142,9 +146,11 @@ public class RealMainActivity extends AppCompatActivity {
             mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
             mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh_mm_ss");
+            dateOfRecordedGame = simpleDateFormat.format(new Date());
+
             mVideoURL = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) +
-                    new StringBuilder("/ChessRecord-").append(new SimpleDateFormat("dd-MM-yyyy-hh_mm_ss")
-                            .format(new Date())).append(".mp4").toString();
+                    new StringBuilder("/ChessRecord-").append(dateOfRecordedGame).append(".mp4").toString();
 
             mMediaRecorder.setOutputFile(mVideoURL);
             mMediaRecorder.setVideoSize(DISPLAY_WIDTH,DISPLAY_HEIGHT);

@@ -16,6 +16,10 @@ public class GameReplay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_replay_layout);
 
+        // Get the game title that was passed from vault whenever an item was clicked
+        String gameTitlePassedFromGameVault = getIntent().getStringExtra("Game_Title");
+        RealMainActivity.mVideoURL = RealMainActivity.recordedGamesHashMap.get(gameTitlePassedFromGameVault);
+
         videoView = (VideoView) findViewById(R.id.video_view);
         videoView.setVideoURI(Uri.parse(RealMainActivity.mVideoURL));
 

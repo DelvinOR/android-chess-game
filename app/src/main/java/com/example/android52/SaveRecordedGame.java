@@ -26,7 +26,15 @@ public class SaveRecordedGame extends AppCompatActivity {
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RealMainActivity.recordedGamesHashMap.put(gameTitleEditText.getText().toString(), RealMainActivity.mVideoURL);
+                String gameTitle = gameTitleEditText.getText().toString();
+
+                // We save the game title into the recordedGamesHashMap and arrayOfGameTitles
+                RealMainActivity.recordedGamesHashMap.put(gameTitle, RealMainActivity.mVideoURL);
+                RealMainActivity.gameTitlesAndDates.put(gameTitle, RealMainActivity.dateOfRecordedGame);
+                RealMainActivity.arrayOfGameTitles.add(gameTitle);
+                RealMainActivity.arrayOfGameRecordedDates.add(RealMainActivity.dateOfRecordedGame);
+
+
                 backToHome();
             }
         });
