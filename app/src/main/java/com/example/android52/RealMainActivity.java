@@ -40,6 +40,7 @@ public class RealMainActivity extends AppCompatActivity {
     public static HashMap<String,String> gameTitlesAndDates = new HashMap<>();
 ;   public static ArrayList<String> arrayOfGameTitles = new ArrayList<>();
     public static ArrayList<String> arrayOfGameRecordedDates = new ArrayList<>();
+
     // Following fields will be used for screen recording
     public static final int REQUEST_CODE = 1000;
     public static final int REQUEST_PERMISSION = 1001;

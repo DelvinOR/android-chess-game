@@ -11,13 +11,16 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 public class GameVault extends AppCompatActivity {
 
     public ListView recordedGamesListView;
-    public ListAdapter theAdapter;
+    public ArrayAdapter theAdapter;
     public Spinner sortBySpinner;
     public ArrayList<String> sortedGameTitles;
     public String[] sortedGameTitlesArray;
@@ -43,7 +46,6 @@ public class GameVault extends AppCompatActivity {
             public void onItemClick(AdapterView<?> spinner, View view, int pos, long l) {
                 String desiredSort = String.valueOf(spinner.getItemAtPosition(pos));
                 if(desiredSort.equals("Sort by Title")){
-                    // Do nothing
                     sortByTitles();
                 }else{
                     sortByDates();
@@ -51,9 +53,7 @@ public class GameVault extends AppCompatActivity {
             }
         });
 
-        // NEED TO SORT THESE RECORDED GAMES BY DATE AND TITLE (USER CAN SELECT WHICH WAY TO SORT
-        // Maybe add a Date field into RealMain Activity
-
+        // Whenever an item in the list view is clicked
         recordedGamesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
@@ -69,11 +69,47 @@ public class GameVault extends AppCompatActivity {
     }
 
     public void sortByDates(){
+        // Make a date string array
+        // convert date string array to date Date array
+        // Arrays.sort();
+        int arrayLength = RealMainActivity.arrayOfGameTitles.size();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy-hh_mm_ss");
+        Date[] dates = new Date[arrayLength];
+        String[] sortedGameDates = new String[arrayLength];
+
+        for(int i = 0; i< arrayLength; i++){
+            sortedGameDates[i] = RealMainActivity.gameTitlesAndDates.get(sortedGameTitlesArray[i]);
+        }
+
+        for(int i = 0; i < arrayLength; i++){
+            try {
+                dates[i] = sdf.parse(sortedGameDates[i]);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Arrays.sort(dates);
+
+        for(int i = 0; i < arrayLength; i++){
+            sortedGameDates[i] = sdf.format(dates[i]);
+        }
+
+        // sortedGameDates contain correct dates in order
+
+        for(int i = 0; i < arrayLength; i++){
+            int index = RealMainActivity.arrayOfGameRecordedDates.indexOf(sortedGameDates[i]);
+            sortedGameTitlesArray[i] = RealMainActivity.arrayOfGameTitles.get(index);
+        }
+
+        // sortedGameTitlesArray contains the correct game titles sorted by dates
+        theAdapter.notifyDataSetChanged();
 
     }
 
     public void sortByTitles(){
-
+        Arrays.sort(sortedGameTitlesArray);
+        theAdapter.notifyDataSetChanged();
     }
 
     public void playVideo(String gameTitleClicked){

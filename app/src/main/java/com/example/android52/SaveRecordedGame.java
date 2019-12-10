@@ -34,7 +34,6 @@ public class SaveRecordedGame extends AppCompatActivity {
                 RealMainActivity.arrayOfGameTitles.add(gameTitle);
                 RealMainActivity.arrayOfGameRecordedDates.add(RealMainActivity.dateOfRecordedGame);
 
-
                 backToHome();
             }
         });
