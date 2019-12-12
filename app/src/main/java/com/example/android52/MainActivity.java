@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.android52.controllers.Controller;
 import com.example.android52.models.ChessBoard;
 import com.example.android52.models.ChessPiece;
 
@@ -14,6 +13,10 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     public ChessBoard chessBoard;
     public HashMap<String, Button> buttonBoard;
+
+    int pressCount = 0;
+    char f1, r1, f2, r2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        pressCount++;
+        String clickedLocation = v.getResources().getResourceName(v.getId());
+        clickedLocation = clickedLocation.substring(clickedLocation.indexOf('_')+1);
 
+        if(pressCount == 1){
+            f1 = clickedLocation.charAt(0);
+            r1 = clickedLocation.charAt(1);
+            //check if the button holds any piece, if so highlight the possible moves they can make on the board
+        }
+
+        if(pressCount == 2){
+            f2 = clickedLocation.charAt(0);
+            r2 = clickedLocation.charAt(1);
+            //check if the move they're trying to make is valid, gotta use the isMoveValid method on chessPieces.
+        }
     }
 
     public void mapBoard(ChessBoard cb) {
@@ -38,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int resourceID = getResources().getIdentifier(buttonID, "id", getPackageName());
 
                 Button pieceButton = findViewById(resourceID);
+                //pieceButton.setTag(1, ""+f+r);
                 pieceButton.setOnClickListener(this);
                 pieceButton.setText("");
                 pieceButton.setTextSize(20);
@@ -53,13 +71,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public class Location {
-        public char file;
-        public int rank;
 
-        public Location(char f, int r) {
-            file = f;
-            r = rank;
-        }
-    }
 }
