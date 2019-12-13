@@ -108,7 +108,7 @@ public class RealMainActivity extends AppCompatActivity {
                                                 new String[] {
                                                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                                         Manifest.permission.RECORD_AUDIO,
-                                                        Manifest.permission.READ_EXTERNAL_STORAGE
+                                                        //Manifest.permission.READ_EXTERNAL_STORAGE
                                                 },
                                                 REQUEST_PERMISSION);
                                     }
@@ -118,7 +118,7 @@ public class RealMainActivity extends AppCompatActivity {
                                 new String[] {
                                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                         Manifest.permission.RECORD_AUDIO,
-                                        Manifest.permission.READ_EXTERNAL_STORAGE
+                                        //Manifest.permission.READ_EXTERNAL_STORAGE
                                 },
                                 REQUEST_PERMISSION);
                     }
@@ -126,8 +126,6 @@ public class RealMainActivity extends AppCompatActivity {
                 }else{
                     toggleScreenShare();
                 }
-
-                playChess();
             }
         });
 
@@ -173,7 +171,7 @@ public class RealMainActivity extends AppCompatActivity {
             int orientation = ORIENTATION.get(rotation+90);
             mMediaRecorder.setOrientationHint(orientation);
             mMediaRecorder.prepare();
-        } catch (IOException e) {
+        } catch (IOException e) {mVirtualDisplay.release();
             e.printStackTrace();
         }
     }
@@ -212,6 +210,8 @@ public class RealMainActivity extends AppCompatActivity {
         mMediaProjection.registerCallback(mMediaProjectionCallBack, null);
         mVirtualDisplay = createVirtualDisplay();
         mMediaRecorder.start();
+        playChess();
+
     }
 
     public void playChess(){
@@ -220,20 +220,20 @@ public class RealMainActivity extends AppCompatActivity {
         startActivity(intent1);
     }
 
-    /*
-    public void stopRecordScreen(){
-        if (mVirtualDisplay != null) {
-            mVirtualDisplay.release();
-        }
 
+    public void stopRecordScreen(){
+        if (mVirtualDisplay == null) {
+            return;
+        }
+        mVirtualDisplay.release();
         // mVirtualDisplay contains the screen recording video
         destroyMediaProjection();
 
         // call for save recorded game pop out window
-        Intent saveGameIntent = new Intent(RealMainActivity.this, SaveRecordedGame.class);
-        startActivity(saveGameIntent);
+        //Intent saveGameIntent = new Intent(RealMainActivity.this, SaveRecordedGame.class);
+        //startActivity(saveGameIntent);
 
-    }*/
+    }
 
     public static void destroyMediaProjection(){
         if (mMediaProjection != null){

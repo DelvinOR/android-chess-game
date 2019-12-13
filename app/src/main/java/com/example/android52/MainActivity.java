@@ -149,11 +149,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         AlertDialog resignDialog = builder.create();
         resignDialog.show();
-        //RealMainActivity.mMediaRecorder.stop();
-        //RealMainActivity.mMediaRecorder.reset();
+        RealMainActivity.mMediaRecorder.stop();
+        RealMainActivity.mMediaRecorder.reset();
         //startActivity(new Intent(MainActivity.this,RealMainActivity.class));
 
         // call for save recorded game pop out window
+        new RealMainActivity().stopRecordScreen();
         Intent saveGameIntent = new Intent(MainActivity.this, SaveRecordedGame.class);
         startActivity(saveGameIntent);
         finish();
@@ -176,10 +177,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         AlertDialog drawDialog = builder.create();
         drawDialog.show();
-        //RealMainActivity.mMediaRecorder.stop();
-        //RealMainActivity.mMediaRecorder.reset();
+        RealMainActivity.mMediaRecorder.stop();
+        RealMainActivity.mMediaRecorder.reset();
 
         // call for save recorded game pop out window
+        new RealMainActivity().stopRecordScreen();;
         Intent saveGameIntent = new Intent(MainActivity.this, SaveRecordedGame.class);
         startActivity(saveGameIntent);
         finish();
