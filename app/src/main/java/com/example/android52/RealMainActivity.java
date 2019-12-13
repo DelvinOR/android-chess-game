@@ -1,6 +1,7 @@
 package com.example.android52;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -72,6 +73,8 @@ public class RealMainActivity extends AppCompatActivity {
     private Button playChessButton, gameVaultButton;
     private LinearLayout chessLayout;
 
+    public Intent intent1, intent2;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +86,6 @@ public class RealMainActivity extends AppCompatActivity {
 
         mMediaRecorder = new MediaRecorder();
         mMediaProjectManager = (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
-
 
         welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
         playChessButton = (Button) findViewById(R.id.playChessButton);
@@ -105,7 +107,8 @@ public class RealMainActivity extends AppCompatActivity {
                                         ActivityCompat.requestPermissions(RealMainActivity.this,
                                                 new String[] {
                                                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                                        Manifest.permission.RECORD_AUDIO
+                                                        Manifest.permission.RECORD_AUDIO,
+                                                        Manifest.permission.READ_EXTERNAL_STORAGE
                                                 },
                                                 REQUEST_PERMISSION);
                                     }
@@ -114,7 +117,8 @@ public class RealMainActivity extends AppCompatActivity {
                         ActivityCompat.requestPermissions(RealMainActivity.this,
                                 new String[] {
                                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                        Manifest.permission.RECORD_AUDIO
+                                        Manifest.permission.RECORD_AUDIO,
+                                        Manifest.permission.READ_EXTERNAL_STORAGE
                                 },
                                 REQUEST_PERMISSION);
                     }
@@ -130,7 +134,12 @@ public class RealMainActivity extends AppCompatActivity {
         gameVaultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGameVault();
+                if(arrayOfGameTitles.size() > 0){
+                    intent2 = new Intent(RealMainActivity.this, GameVault.class);
+                    startActivity(intent2);
+                }else{
+                    Toast.makeText(RealMainActivity.this, "Error", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -147,11 +156,11 @@ public class RealMainActivity extends AppCompatActivity {
             mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
             mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh_mm_ss");
-            dateOfRecordedGame = simpleDateFormat.format(new Date());
+            //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh_mm_ss");
+            //dateOfRecordedGame = simpleDateFormat.format(new Date());
 
             mVideoURL = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) +
-                    new StringBuilder("/ChessRecord-").append(dateOfRecordedGame).append(".mp4").toString();
+                    new StringBuilder("/ChessRecord-").append(new SimpleDateFormat("dd-MM-yyyy-hh_mm_ss").format(new Date())).append(".mp4").toString();
 
             mMediaRecorder.setOutputFile(mVideoURL);
             mMediaRecorder.setVideoSize(DISPLAY_WIDTH,DISPLAY_HEIGHT);
@@ -207,31 +216,26 @@ public class RealMainActivity extends AppCompatActivity {
 
     public void playChess(){
 
-        Intent intent = new Intent(RealMainActivity.this, MainActivity.class);
-        startActivity(intent);
+        intent1 = new Intent(RealMainActivity.this, MainActivity.class);
+        startActivity(intent1);
     }
 
-    public void openGameVault(){
-        Intent openGameVault = new Intent(RealMainActivity.this, GameVault.class);
-        startActivity(openGameVault);
-    }
-
+    /*
     public void stopRecordScreen(){
-        if (mVirtualDisplay == null) {
-            return;
+        if (mVirtualDisplay != null) {
+            mVirtualDisplay.release();
         }
 
         // mVirtualDisplay contains the screen recording video
-        mVirtualDisplay.release();
         destroyMediaProjection();
 
         // call for save recorded game pop out window
         Intent saveGameIntent = new Intent(RealMainActivity.this, SaveRecordedGame.class);
         startActivity(saveGameIntent);
 
-    }
+    }*/
 
-    public void destroyMediaProjection(){
+    public static void destroyMediaProjection(){
         if (mMediaProjection != null){
             mMediaProjection.unregisterCallback(mMediaProjectionCallBack);
             mMediaProjection.stop();
@@ -255,7 +259,8 @@ public class RealMainActivity extends AppCompatActivity {
                                     ActivityCompat.requestPermissions(RealMainActivity.this,
                                             new String[] {
                                                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                                    Manifest.permission.RECORD_AUDIO
+                                                    Manifest.permission.RECORD_AUDIO,
+                                                    Manifest.permission.READ_EXTERNAL_STORAGE
                                             },
                                             REQUEST_PERMISSION);
                                 }

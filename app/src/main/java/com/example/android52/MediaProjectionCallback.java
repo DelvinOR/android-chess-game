@@ -12,8 +12,8 @@ public class MediaProjectionCallback extends MediaProjection.Callback {
 
         RealMainActivity.mMediaRecorder.stop();
         RealMainActivity.mMediaRecorder.reset();
-        RealMainActivity.mMediaProjection = null;
-        new RealMainActivity().stopRecordScreen();
+        //RealMainActivity.mMediaProjection = null;
+        RealMainActivity.destroyMediaProjection();
     }
 
 }

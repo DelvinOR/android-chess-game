@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SaveRecordedGame extends AppCompatActivity {
 
@@ -23,6 +24,8 @@ public class SaveRecordedGame extends AppCompatActivity {
         save_button = (Button) findViewById(R.id.save_button);
         no_button = (Button) findViewById(R.id.no_button);
 
+        Toast.makeText(SaveRecordedGame.this, RealMainActivity.mVideoURL, Toast.LENGTH_LONG).show();
+
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,6 +36,12 @@ public class SaveRecordedGame extends AppCompatActivity {
                 RealMainActivity.gameTitlesAndDates.put(gameTitle, RealMainActivity.dateOfRecordedGame);
                 RealMainActivity.arrayOfGameTitles.add(gameTitle);
                 RealMainActivity.arrayOfGameRecordedDates.add(RealMainActivity.dateOfRecordedGame);
+
+                if(RealMainActivity.arrayOfGameTitles.size()>0){
+                    Toast.makeText(SaveRecordedGame.this, "Success!", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(SaveRecordedGame.this, "Failure", Toast.LENGTH_LONG).show();
+                }
 
                 backToHome();
             }
@@ -48,7 +57,8 @@ public class SaveRecordedGame extends AppCompatActivity {
     }
 
     public void backToHome(){
-        Intent backToHomepage = new Intent(this, RealMainActivity.class);
+        Intent backToHomepage = new Intent(SaveRecordedGame.this, RealMainActivity.class);
         startActivity(backToHomepage);
+        finish();
     }
 }

@@ -2,6 +2,7 @@ package com.example.android52;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.MediaController;
@@ -12,7 +13,7 @@ public class GameReplay extends AppCompatActivity {
     public VideoView videoView;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_replay_layout);
 
@@ -21,12 +22,13 @@ public class GameReplay extends AppCompatActivity {
         RealMainActivity.mVideoURL = RealMainActivity.recordedGamesHashMap.get(gameTitlePassedFromGameVault);
 
         videoView = (VideoView) findViewById(R.id.video_view);
-        videoView.setVideoURI(Uri.parse(RealMainActivity.mVideoURL));
 
-        MediaController mediaController = new MediaController(this);
-        videoView.setMediaController(mediaController);
-
-        // We will need an anchor view for our media controller
+        MediaController mediaController = new MediaController(GameReplay.this);
         mediaController.setAnchorView(videoView);
+        videoView.setMediaController(mediaController);
+        videoView.setVideoURI(Uri.parse(RealMainActivity.mVideoURL));
+        // We will need an anchor view for our media controller
+        RealMainActivity.mVideoURL = "";
+        videoView.start();
     }
 }

@@ -26,30 +26,43 @@ public class GameVault extends AppCompatActivity {
     public String[] sortedGameTitlesArray;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_vault_layout);
 
         recordedGamesListView = (ListView)findViewById(R.id.recordedGamesListView);
         sortBySpinner = (Spinner) findViewById(R.id.sortBySpinner);
-        sortedGameTitles = new ArrayList<>(RealMainActivity.arrayOfGameTitles);
-        sortedGameTitlesArray = sortedGameTitles.toArray(new String[sortedGameTitles.size()]);
+        //sortedGameTitlesArray = new String[sortedGameTitles.size()];
+        if(RealMainActivity.arrayOfGameTitles != null){
+            sortedGameTitles = new ArrayList<>(RealMainActivity.arrayOfGameTitles);
+            sortedGameTitlesArray = new String[sortedGameTitles.size()];
+            sortedGameTitlesArray = sortedGameTitles.toArray(new String[sortedGameTitles.size()]);
+        }else{
+            startActivity(new Intent(GameVault.this, RealMainActivity.class));
+            finish();
+        }
+
         Arrays.sort(sortedGameTitlesArray);
         // Default in spinner is set to Sort by Title
         sortBySpinner.setSelection(0);
-        theAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, sortedGameTitlesArray);// HOW TO CHANGE ADAPTER DATA
+        theAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,sortedGameTitlesArray);// HOW TO CHANGE ADAPTER DATA
         recordedGamesListView.setAdapter(theAdapter);
 
 
-        sortBySpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        sortBySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> spinner, View view, int pos, long l) {
-                String desiredSort = String.valueOf(spinner.getItemAtPosition(pos));
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String desiredSort = String.valueOf(parent.getItemAtPosition(position));
                 if(desiredSort.equals("Sort by Title")){
                     sortByTitles();
                 }else{
                     sortByDates();
                 }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                return;
             }
         });
 
@@ -59,7 +72,7 @@ public class GameVault extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
 
                 // Whenever an game title is clicked on, we pass that game title string into extras and
-                // send start the GameReplay actitivity
+                // send start the GameReplay activity
                 String gameTitleClicked = String.valueOf(adapterView.getItemAtPosition(pos));
 
                 playVideo(gameTitleClicked);
@@ -113,8 +126,9 @@ public class GameVault extends AppCompatActivity {
     }
 
     public void playVideo(String gameTitleClicked){
-        Intent intent = new Intent(this, GameReplay.class);
+        Intent intent = new Intent(GameVault.this, GameReplay.class);
         intent.putExtra("Game_Title",gameTitleClicked);
         startActivity(intent);
+        finish();
     }
 }

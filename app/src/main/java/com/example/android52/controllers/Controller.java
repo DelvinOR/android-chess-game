@@ -80,9 +80,6 @@ public class Controller {
 		// THE CODE UNDER HERE IS TEMPORARY
 		sc.close();
 		// This is where we will need to do all the calling to stop screen sharing
-		RealMainActivity.mMediaRecorder.stop();
-		RealMainActivity.mMediaRecorder.reset();
-		new RealMainActivity().stopRecordScreen();
 	}
 
 	public static boolean isCorrectFormat(String s) {
