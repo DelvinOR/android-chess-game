@@ -12,14 +12,64 @@
         android:layout_height="127dp"
         android:layout_marginBottom="10dp">
 
-        <Button
-            android:id="@+id/undo_button"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:text="White's Turn"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
+            android:textSize="25dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/cardview_dark_background"
+            android:id="@+id/turn"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/back_button"
+            android:onClick="goHome"/>
+
+        <Button
+            android:id="@+id/ai_button"
+            android:onClick="makeAiMove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="5dp"
+            android:text="AI"/>
+
+        <Button
+            android:id="@+id/resign_button"
+            android:onClick="resign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:text="Resign"
+            android:layout_marginStart="5dp"/>
+
+        <Button
+            android:onClick="askForDraw"
+            android:id="@+id/draw_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Draw"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/undo_button"
+            android:onClick="undoLastMove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
             android:text="Undo" />
     </RelativeLayout>
 

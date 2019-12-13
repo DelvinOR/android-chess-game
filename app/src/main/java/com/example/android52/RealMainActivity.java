@@ -207,12 +207,12 @@ public class RealMainActivity extends AppCompatActivity {
 
     public void playChess(){
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(RealMainActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
     public void openGameVault(){
-        Intent openGameVault = new Intent(this, GameVault.class);
+        Intent openGameVault = new Intent(RealMainActivity.this, GameVault.class);
         startActivity(openGameVault);
     }
 
@@ -226,7 +226,7 @@ public class RealMainActivity extends AppCompatActivity {
         destroyMediaProjection();
 
         // call for save recorded game pop out window
-        Intent saveGameIntent = new Intent(this, SaveRecordedGame.class);
+        Intent saveGameIntent = new Intent(RealMainActivity.this, SaveRecordedGame.class);
         startActivity(saveGameIntent);
 
     }

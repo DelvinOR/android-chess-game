@@ -31,13 +31,13 @@ public class King extends ChessPiece {
 
 	@Override
 	public boolean isMoveValid(HashMap<Character, ChessPiece[]> board, char file, int rank) {
-		int rankDiff = Math.abs(rank - this.rank);
-		int fileDiff = Math.abs(file - this.file);
-
-		if (rankDiff <= 1 && fileDiff <= 1) {
-			if (!this.movingIntoCheck(board, file, rank))
-				return true;
-		}
+//		int rankDiff = Math.abs(rank - this.rank);
+//		int fileDiff = Math.abs(file - this.file);
+//
+//		if (rankDiff <= 1 && fileDiff <= 1) {
+//			if (!this.movingIntoCheck(board, file, rank))
+//				return true;
+//		}
 		return false;
 	}
 
